@@ -1,0 +1,20 @@
+Thiết kế form Đặt phòng khách sạn gồm:
+
+Họ tên khách hàng
+Số điện thoại
+Loại phòng:
+Phòng đơn
+Phòng đôi
+Phòng VIP
+Ngày nhận phòng (date)
+Số ngày ở
+Dịch vụ đi kèm (checkbox):
+Ăn sáng
+Hồ bơi
+Xe đưa đón
+Nút Đặt phòng
+
+👉 Yêu cầu:
+
+Không để trống họ tên, SĐT
+Số ngày ở > 0

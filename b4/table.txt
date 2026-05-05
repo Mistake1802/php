@@ -1,0 +1,14 @@
+CREATE DATABASE RapPhim;
+USE RapPhim;
+
+CREATE TABLE datve (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hoten VARCHAR(50),
+    sdt VARCHAR(15),
+    phim VARCHAR(50),
+    suatchieu VARCHAR(10),
+    sove INT,
+    loaighe VARCHAR(10),
+    combo VARCHAR(100),
+    tongtien INT
+);

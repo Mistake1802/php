@@ -1,0 +1,12 @@
+CREATE DATABASE KhachSan;
+USE KhachSan;
+
+CREATE TABLE datphong (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hoten VARCHAR(50),
+    sdt VARCHAR(15),
+    loaiphong VARCHAR(20),
+    ngaynhan DATE,
+    songay INT,
+    dichvu VARCHAR(100)
+);

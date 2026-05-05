@@ -1,0 +1,25 @@
+Thiết kế form Đặt vé xem phim gồm:
+
+Họ tên
+SĐT
+Chọn phim:
+Avengers
+Conan
+Doraemon
+Chọn suất chiếu:
+9h
+14h
+19h
+Số vé (number)
+Loại ghế:
+Thường (50k)
+VIP (100k)
+Combo (checkbox):
+Bắp + nước (30k)
+Bắp lớn (20k)
+
+👉 Yêu cầu:
+
+Không để trống
+Số vé > 0
+Hiển thị tổng tiền bằng JS ngay khi nhập (real-time)

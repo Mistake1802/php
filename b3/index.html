@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Đặt phòng</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #36d1dc, #5b86e5);
+}
+
+.container {
+    width: 420px;
+    margin: 50px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+h2 { text-align: center; }
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+}
+
+.inline-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.inline-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #36d1dc;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Đặt phòng khách sạn</h2>
+
+<form action="xuly.php" method="POST" onsubmit="return validateForm()">
+
+Họ tên:
+<input type="text" name="hoten" id="hoten">
+
+SĐT:
+<input type="text" name="sdt" id="sdt">
+
+Loại phòng:
+<select name="loaiphong">
+<option>Phòng đơn</option>
+<option>Phòng đôi</option>
+<option>Phòng VIP</option>
+</select>
+
+Ngày nhận:
+<input type="date" name="ngaynhan" id="ngaynhan">
+
+Số ngày:
+<input type="number" name="songay" id="songay">
+
+Dịch vụ:
+<div class="inline-group">
+<label><input type="checkbox" name="dichvu[]" value="Ăn sáng"> Ăn sáng</label>
+<label><input type="checkbox" name="dichvu[]" value="Hồ bơi"> Hồ bơi</label>
+<label><input type="checkbox" name="dichvu[]" value="Xe đưa đón"> Xe đưa đón</label>
+</div>
+
+<button class="btn">Đặt phòng</button>
+
+</form>
+</div>
+
+<script>
+function validateForm() {
+    let hoten = document.getElementById("hoten").value;
+    let sdt = document.getElementById("sdt").value;
+    let songay = document.getElementById("songay").value;
+
+    if (hoten === "" || sdt === "") {
+        alert("Nhập đầy đủ thông tin!");
+        return false;
+    }
+
+    if (songay <= 0) {
+        alert("Số ngày phải > 0");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>
