@@ -1,0 +1,23 @@
+Thiết kế form Đăng ký CLB sinh viên gồm:
+
+Mã sinh viên
+Họ tên
+Email
+Giới tính (Nam/Nữ)
+Chọn CLB:
+Bóng đá
+Âm nhạc
+Lập trình
+Nhiếp ảnh
+Chọn ngày sinh (date)
+Chọn kỹ năng (checkbox):
+Giao tiếp
+Làm việc nhóm
+Sáng tạo
+Nút Đăng ký
+
+👉 Yêu cầu:
+
+Validate:
+Không để trống
+Email đúng định dạng

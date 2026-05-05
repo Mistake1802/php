@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Đăng ký học</title>
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 420px;
+        margin: 60px auto;
+        background: white;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        transition: 0.3s;
+    }
+
+    input:focus, select:focus {
+        border-color: #6c63ff;
+        outline: none;
+    }
+
+    .radio-group,
+    .checkbox-group {
+        margin-top: 5px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        background: #6c63ff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #574fd6;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Đăng ký môn học</h2>
+
+    <form action="xuly.php" method="POST" onsubmit="return validateForm()">
+
+        <div class="form-group">
+            <label>Mã sinh viên</label>
+            <input type="text" name="masv" id="masv">
+        </div>
+
+        <div class="form-group">
+            <label>Họ tên</label>
+            <input type="text" name="hoten" id="hoten">
+        </div>
+
+        <div class="form-group">
+            <label>Giới tính</label>
+            <div class="radio-group">
+                <input type="radio" name="gioitinh" value="Nam"> Nam
+                <input type="radio" name="gioitinh" value="Nữ"> Nữ
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn kỳ học</label>
+            <select name="kyhoc">
+                <option>Kỳ 1</option>
+                <option>Kỳ 2</option>
+                <option>Kỳ 3</option>
+                <option>Kỳ 4</option>
+                <option>Kỳ 5</option>
+                <option>Kỳ 6</option>
+                <option>Kỳ 7</option>
+                <option>Kỳ 8</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn môn học</label>
+            <select name="monhoc">
+                <option>Lập trình cơ bản</option>
+                <option>Tiếng Anh nâng cao</option>
+                <option>Hệ quản trị CSDL</option>
+                <option>Lập trình hướng đối tượng</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn buổi học</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="buoihoc[]" value="Sáng"> Sáng (7h-11h)<br>
+                <input type="checkbox" name="buoihoc[]" value="Chiều"> Chiều (13h-17h)<br>
+                <input type="checkbox" name="buoihoc[]" value="Tối"> Tối (18h-20h)
+            </div>
+        </div>
+
+        <button class="btn" type="submit">Đăng ký</button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let masv = document.getElementById("masv").value;
+    let hoten = document.getElementById("hoten").value;
+
+    if (masv === "" || hoten === "") {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</body>
+</html>

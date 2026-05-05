@@ -1,0 +1,10 @@
+CREATE TABLE thanhvien (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    masv VARCHAR(20),
+    hoten VARCHAR(50),
+    email VARCHAR(100),
+    gioitinh VARCHAR(10),
+    clb VARCHAR(50),
+    ngaysinh DATE,
+    kynang VARCHAR(100)
+);

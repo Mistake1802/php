@@ -1,0 +1,12 @@
+CREATE DATABASE Kiemtra2;
+USE Kiemtra2;
+
+CREATE TABLE tbthongtindk (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    masv VARCHAR(20),
+    hoten VARCHAR(50),
+    gioitinh VARCHAR(10),
+    kyhoc VARCHAR(10),
+    monhoc VARCHAR(50),
+    buoihoc VARCHAR(100)
+);

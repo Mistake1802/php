@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Đăng ký CLB</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.container {
+    width: 420px;
+    margin: 50px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.inline-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inline-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Đăng ký CLB</h2>
+
+<form action="xuly.php" method="POST" onsubmit="return validateForm()">
+
+Mã SV:
+<input type="text" name="masv" id="masv">
+
+Họ tên:
+<input type="text" name="hoten" id="hoten">
+
+Email:
+<input type="text" name="email" id="email">
+
+<div class="form-group">
+    <label>Giới tính:</label>
+    <div class="inline-group">
+        <label><input type="radio" name="gioitinh" value="Nam"> Nam</label>
+        <label><input type="radio" name="gioitinh" value="Nữ"> Nữ</label>
+    </div>
+</div>
+CLB:
+<select name="clb">
+<option>Bóng đá</option>
+<option>Âm nhạc</option>
+<option>Lập trình</option>
+<option>Nhiếp ảnh</option>
+</select>
+
+Ngày sinh:
+<input type="date" name="ngaysinh">
+<div class="form-group">
+    <label>Kỹ năng:</label>
+    <div class="inline-group">
+        <label><input type="checkbox" name="kynang[]" value="Giao tiếp"> Giao tiếp</label>
+        <label><input type="checkbox" name="kynang[]" value="Làm việc nhóm"> Làm việc nhóm</label>
+        <label><input type="checkbox" name="kynang[]" value="Sáng tạo"> Sáng tạo</label>
+    </div>
+</div>
+<button class="btn">Đăng ký</button>
+
+</form>
+</div>
+
+<script>
+function validateForm() {
+    let masv = document.getElementById("masv").value;
+    let hoten = document.getElementById("hoten").value;
+    let email = document.getElementById("email").value;
+
+    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (masv === "" || hoten === "" || email === "") {
+        alert("Nhập đầy đủ thông tin!");
+        return false;
+    }
+
+    if (!regex.test(email)) {
+        alert("Email không hợp lệ!");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>
