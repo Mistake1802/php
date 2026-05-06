@@ -1,0 +1,174 @@
+🧠 BÀI 1 – ĐĂNG KÝ TÀI KHOẢN (FULL)
+🧱 DATABASE
+CREATE DATABASE accountDB;
+USE accountDB;
+
+CREATE TABLE users (
+    username VARCHAR(50),
+    password VARCHAR(50),
+    email VARCHAR(100)
+);
+🎨 index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Đăng ký</title>
+
+<style>
+body { font-family: Arial; background: #74ebd5; }
+.box {
+    width: 300px;
+    margin: 100px auto;
+    background: white;
+    padding: 20px;
+    text-align: center;
+}
+input { width: 90%; margin: 8px 0; padding: 8px; }
+button { padding: 10px; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h3>Đăng ký</h3>
+
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+<input type="password" id="repass" placeholder="Nhập lại">
+<input type="text" id="email" placeholder="Email">
+
+<button onclick="dangky()">Đăng ký</button>
+
+<div id="msg"></div>
+</div>
+
+<script>
+function dangky(){
+    let u = user.value;
+    let p = pass.value;
+    let r = repass.value;
+    let e = email.value;
+
+    if(u==""||p==""||r==""||e==""){
+        msg.innerHTML="Nhập đủ!";
+        return;
+    }
+
+    if(p.length < 6){
+        msg.innerHTML="Pass >=6 ký tự";
+        return;
+    }
+
+    if(p != r){
+        msg.innerHTML="Pass không khớp";
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","xuly.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    xhr.onload = function(){
+        msg.innerHTML = this.responseText;
+    };
+
+    xhr.send("u="+u+"&p="+p+"&e="+e);
+}
+</script>
+
+</body>
+</html>
+⚙️ xuly.php
+<?php
+$conn = new mysqli("localhost","root","","accountDB");
+
+$u = $_POST['u'];
+$p = $_POST['p'];
+$e = $_POST['e'];
+
+// check trùng
+$check = $conn->query("SELECT * FROM users WHERE username='$u'");
+
+if($check->num_rows > 0){
+    echo "Username đã tồn tại!";
+}else{
+    $conn->query("INSERT INTO users VALUES('$u','$p','$e')");
+    echo "Đăng ký thành công!";
+}
+
+$conn->close();
+?>
+🧠 BÀI 2 – TÌM KIẾM REALTIME (FULL)
+🧱 DATABASE
+CREATE DATABASE sinhvienDB;
+USE sinhvienDB;
+
+CREATE TABLE sinhvien (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hoten VARCHAR(50)
+);
+
+INSERT INTO sinhvien(hoten) VALUES
+('Nguyen Van A'),
+('Tran Thi B'),
+('Le Van C'),
+('Pham Van D');
+🎨 index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tìm kiếm</title>
+
+<style>
+.box {
+    width: 300px;
+    margin: 100px auto;
+}
+input { width: 100%; padding: 8px; }
+#kq { background: #eee; padding: 10px; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h3>Tìm sinh viên</h3>
+
+<input type="text" onkeyup="tim(this.value)" placeholder="Nhập tên...">
+
+<div id="kq"></div>
+</div>
+
+<script>
+function tim(keyword){
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET","xuly.php?k="+keyword,true);
+
+    xhr.onload = function(){
+        kq.innerHTML = this.responseText;
+    };
+
+    xhr.send();
+}
+</script>
+
+</body>
+</html>
+⚙️ xuly.php
+<?php
+$conn = new mysqli("localhost","root","","sinhvienDB");
+
+$k = $_GET['k'] ?? "";
+
+$sql = "SELECT * FROM sinhvien WHERE hoten LIKE '%$k%'";
+$result = $conn->query($sql);
+
+while($row = $result->fetch_assoc()){
+    echo $row['hoten'] . "<br>";
+}
+
+$conn->close();
+?>

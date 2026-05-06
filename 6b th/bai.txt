@@ -1,0 +1,111 @@
+🧠 BÀI 1 – ĐĂNG KÝ TÀI KHOẢN (cơ bản → trung bình)
+📌 Yêu cầu:
+
+Tạo form:
+
+Username
+Password
+Nhập lại password
+Email
+
+👉 Validate:
+
+Không để trống
+Password ≥ 6 ký tự
+Password nhập lại phải giống
+
+👉 AJAX gửi dữ liệu → PHP kiểm tra:
+
+Nếu username đã tồn tại → báo lỗi
+Nếu ok → lưu DB
+
+👉 DB:
+
+CREATE DATABASE accountDB;
+CREATE TABLE users (
+    username VARCHAR(50),
+    password VARCHAR(50),
+    email VARCHAR(100)
+);
+🧠 BÀI 2 – TÌM KIẾM SINH VIÊN (AJAX realtime)
+📌 Yêu cầu:
+
+Form chỉ có:
+
+Ô nhập tên sinh viên
+
+👉 Khi gõ → gọi AJAX liên tục
+👉 Hiển thị danh sách gợi ý ngay bên dưới
+
+👉 DB:
+
+CREATE DATABASE sinhvienDB;
+CREATE TABLE sinhvien (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hoten VARCHAR(50)
+);
+
+👉 Gợi ý:
+
+Dùng LIKE '%keyword%'
+AJAX dùng onkeyup
+🧠 BÀI 3 – ĐỔI MẬT KHẨU (logic quan trọng)
+📌 Yêu cầu:
+
+Form:
+
+Username
+Mật khẩu cũ
+Mật khẩu mới
+
+👉 AJAX gửi → PHP xử lý:
+
+Kiểm tra mật khẩu cũ đúng
+Nếu đúng → update mật khẩu
+Nếu sai → báo lỗi
+🧠 BÀI 4 – GIỎ HÀNG MINI (nâng cao hơn)
+📌 Yêu cầu:
+
+Trang hiển thị sản phẩm:
+
+Tên
+Giá
+Nút "Thêm vào giỏ"
+
+👉 Khi bấm:
+
+Dùng AJAX thêm vào giỏ (session PHP)
+
+👉 Hiển thị:
+
+Tổng số lượng
+Tổng tiền
+
+👉 Không reload trang
+
+🧠 BÀI 5 – LOGIN + SESSION (giống thật)
+📌 Yêu cầu:
+Đăng nhập bằng AJAX
+Nếu đúng:
+👉 lưu session
+👉 chuyển sang trang home.php
+Nếu chưa login:
+👉 không cho vào home.php
+🧠 BÀI 6 – COMMENT AJAX (rất hay ra thi)
+📌 Yêu cầu:
+
+Form:
+
+Nhập nội dung comment
+
+👉 Submit:
+
+Không reload
+Hiển thị comment mới ngay
+
+👉 DB:
+
+CREATE TABLE comment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    noidung TEXT
+);

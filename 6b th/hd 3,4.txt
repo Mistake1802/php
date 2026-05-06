@@ -1,0 +1,181 @@
+🧠 BÀI 3 – ĐỔI MẬT KHẨU (FULL)
+🧱 DATABASE (dùng lại DB cũ)
+USE accountDB;
+🎨 index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Đổi mật khẩu</title>
+
+<style>
+.box {
+    width: 300px;
+    margin: 100px auto;
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+}
+input { width: 90%; margin: 8px 0; padding: 8px; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h3>Đổi mật khẩu</h3>
+
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="old" placeholder="Mật khẩu cũ">
+<input type="password" id="new" placeholder="Mật khẩu mới">
+
+<button onclick="doimk()">Đổi</button>
+
+<div id="msg"></div>
+</div>
+
+<script>
+function doimk(){
+    let u = user.value;
+    let o = old.value;
+    let n = new.value;
+
+    if(u==""||o==""||n==""){
+        msg.innerHTML="Nhập đủ!";
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","xuly.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    xhr.onload = function(){
+        msg.innerHTML = this.responseText;
+    };
+
+    xhr.send("u="+u+"&o="+o+"&n="+n);
+}
+</script>
+
+</body>
+</html>
+⚙️ xuly.php
+<?php
+$conn = new mysqli("localhost","root","","accountDB");
+
+$u = $_POST['u'];
+$o = $_POST['o'];
+$n = $_POST['n'];
+
+// kiểm tra mật khẩu cũ
+$sql = "SELECT * FROM users WHERE username='$u' AND password='$o'";
+$result = $conn->query($sql);
+
+if($result->num_rows > 0){
+    // đúng → update
+    $conn->query("UPDATE users SET password='$n' WHERE username='$u'");
+    echo "Đổi mật khẩu thành công!";
+}else{
+    echo "Sai mật khẩu cũ!";
+}
+
+$conn->close();
+?>
+🧠 BÀI 4 – COMMENT REALTIME (FULL)
+🧱 DATABASE
+CREATE DATABASE commentDB;
+USE commentDB;
+
+CREATE TABLE comment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    noidung TEXT
+);
+🎨 index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Comment</title>
+
+<style>
+.box {
+    width: 400px;
+    margin: 50px auto;
+}
+textarea {
+    width: 100%;
+    height: 60px;
+}
+#list {
+    margin-top: 20px;
+    background: #eee;
+    padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h3>Comment</h3>
+
+<textarea id="nd"></textarea><br>
+<button onclick="gui()">Gửi</button>
+
+<div id="list"></div>
+</div>
+
+<script>
+function load(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET","xuly.php",true);
+
+    xhr.onload = function(){
+        list.innerHTML = this.responseText;
+    };
+
+    xhr.send();
+}
+
+function gui(){
+    let nd = document.getElementById("nd").value;
+
+    if(nd=="") return;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","xuly.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    xhr.onload = function(){
+        document.getElementById("nd").value="";
+        load(); // reload list
+    };
+
+    xhr.send("nd="+nd);
+}
+
+// load lần đầu
+load();
+</script>
+
+</body>
+</html>
+⚙️ xuly.php
+<?php
+$conn = new mysqli("localhost","root","","commentDB");
+
+// nếu POST → thêm comment
+if(isset($_POST['nd'])){
+    $nd = $_POST['nd'];
+    $conn->query("INSERT INTO comment(noidung) VALUES('$nd')");
+}
+
+// luôn hiển thị list
+$result = $conn->query("SELECT * FROM comment ORDER BY id DESC");
+
+while($row = $result->fetch_assoc()){
+    echo $row['noidung'] . "<hr>";
+}
+
+$conn->close();
+?>
